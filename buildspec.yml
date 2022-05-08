@@ -1,0 +1,10 @@
+version: 0.2
+
+phases:
+
+  build:
+    commands:
+      - cd src
+      - npm install
+      - zip -r artifects.zip ./ -x "package*" ".git*"
+      - aws lambda update-function-code --function-name $PROJECT_NAME --zip-file fileb://$CODEBUILD_SRC_DIR/src/artifects.zip
